@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Japanese Adult Video Download</title>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{{ static_url("css/bootstrap.min.css") }}" />
+    <!-- Add custom CSS here -->
+    <link rel="stylesheet" href="{{ static_url("css/style.css") }}" />
+    <link rel="stylesheet" href="{{ static_url("css/dropdown.css") }}" />
+</head>
+
+<body>
+    <div class="navbar navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">DMM動画</a>
+            </div>
+            <div class="navbar-collapse">
+                <div class="navbar-form1 navbar-left input-group1" role="search">
+                    <div id="dd" class="wrapper-dropdown-3" tabindex="1">
+                        <span id="search-type">番号</span>
+                        <ul class="dropdown">
+                            <li><a href="#"><i class="icon-envelope icon-large"></i>標題</a></li>
+                            <li><a href="#"><i class="icon-truck icon-large"></i>女优</a></li>
+                            <li><a href="#"><i class="icon-truck icon-large"></i>監督</a></li>
+                            <li><a href="#"><i class="icon-truck icon-large"></i>分類</a></li>
+                            <li><a href="#"><i class="icon-truck icon-large"></i>番号</a></li>
+                        </ul>
+                    </div>
+                    <input id="search-box" type="text" onkeypress="EnterPress(event)" onkeydown="EnterPress()" />
+                    <span class="input-group-addon1 glyphicon glyphicon-search" onclick="search()" aria-hidden="true"></span>
+                </div>
+                <div class="navbar-right navbar-link btn-group">
+                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                      <li><a href="/?sort=f">Favorites</a>
+                      <li><a href="/fav-s/">Actress</a>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">About</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        {% block body %}{% end %}
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="copyright">Copyright &copy; J.A.V.D All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- JavaScript -->
+<script type="text/javascript">
+function EnterPress(e){
+    var e = e || window.event; 
+        if(e.keyCode == 13){
+            var xx = document.getElementById("search-type").innerHTML
+            var y = document.getElementById("search-box").value
+            switch (xx)
+                {
+                case '番号':
+                  x="p";
+                  break;
+                case '標題':
+                  x="t";
+                  break;
+                case '女优':
+                  x="s";
+                  break;
+                case '監督':
+                  x="d";
+                  break;
+                case '分類':
+                  x="g";
+                  break;
+                }
+            y = y.replace(/\/|\\|%/g, "")
+            window.location.href='/'+x+'/'+y
+            } 
+    }
+function search(){
+    var xx = document.getElementById("search-type").innerHTML
+    var y = document.getElementById("search-box").value
+    switch (xx)
+        {
+        case '番号':
+          x="p";
+          break;
+        case '標題':
+          x="t";
+          break;
+        case '女优':
+          x="s";
+          break;
+        case '監督':
+          x="d";
+          break;
+        case '分類':
+          x="g";
+          break;
+        }
+    y = y.replace(/\/|\\|%/g, "")
+    window.location.href='/'+x+'/'+y
+    }
+</script>
+
+<script type="text/javascript">
+
+function DropDown(el) {
+    this.dd = el;
+    this.placeholder = this.dd.children('span');
+    this.opts = this.dd.find('ul.dropdown > li');
+    this.val = '';
+    this.index = -1;
+    this.initEvents();
+}
+DropDown.prototype = {
+    initEvents : function() {
+        var obj = this;
+
+        obj.dd.on('click', function(event){
+            $(this).toggleClass('active');
+            return false;
+        });
+
+        obj.opts.on('click',function(){
+            var opt = $(this);
+            obj.val = opt.text();
+            obj.index = opt.index();
+            obj.placeholder.text(obj.val);
+        });
+    },
+    getValue : function() {
+        return this.val;
+    },
+    getIndex : function() {
+        return this.index;
+    }
+}
+
+$(function() {
+
+    var dd = new DropDown( $('#dd') );
+    
+    $(document).click(function() {
+        // all dropdowns
+        $('.wrapper-dropdown-3').removeClass('active');
+    });
+
+});
+
+</script>
+
+</body>
+
+</html>
